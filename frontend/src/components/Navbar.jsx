@@ -7,10 +7,10 @@ function Navbar() {
                 Quickr
             </a>
             <div style={{ float: "right" }}>
-                <a className="w3-bar-item w3-button" href="/login">
+                <a className="w3-bar-item w3-button" href="/login"> // Updated
                     Login
                 </a>
-                <a className="w3-bar-item w3-button" href="/register">
+                <a className="w3-bar-item w3-button" href="/register"> // Updated
                     Register
                 </a>
             </div>
@@ -18,4 +18,4 @@ function Navbar() {
     );
 }
 
-export default Navbar; 
+export default Navbar;

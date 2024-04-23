@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Alert from "./Alert";
 
 class Login extends Component {
+    state = { 
+        err: "",
+        login: false // Initialize login state
+    };
+
     login = (e) => {
         e.preventDefault();
         axios
@@ -10,7 +16,11 @@ class Login extends Component {
                 pwd: document.getElementById("password").value,
             })
             .then((res) => {
-                console.log(res.data);
+                if (res.data.error) {
+                    this.setState({ err: res.data.error });
+                } else {
+                    this.setState({ login: true });
+                }
             });
     };
 
@@ -21,6 +31,11 @@ class Login extends Component {
                     LOGIN
                 </div>
                 <div className="w3-container">
+                    {this.state.err.length > 0 && (
+                        <Alert
+                            message={`Check your form and try again! (${this.state.err})`}
+                        />
+                    )}
                     <form onSubmit={this.login}>
                         <p>
                             <label htmlFor="email">Email</label>
@@ -38,11 +53,10 @@ class Login extends Component {
                                 id="password"
                             />
                         </p>
-                        <p>
-                            <button type="submit" class="w3-button w3-blue">
-                                Login
-                            </button>
-                        </p>
+                        <button type="submit" className="w3-button w3-blue">
+                            Login
+                        </button>
+                        {this.state.login && <p>You're logged in!</p>} {/* Check for login state */}
                     </form>
                 </div>
             </div>
