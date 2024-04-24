@@ -128,6 +128,13 @@ def register():
         return jsonify({"success": True})
     except:
         return jsonify({"error": "Invalid form"})
+    
+class Tweet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship('User', foreign_keys=uid)
+    title = db.Column(db.String(256))
+    content = db.Column(db.String(2048))
 
 
 
